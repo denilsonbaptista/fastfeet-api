@@ -1,10 +1,11 @@
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import type { Optional } from '@/core/types/optional'
+import { Optional } from '@/core/types/optional'
 
 interface AdminProps {
   name: string
   cpf: string
+  role: string
   password: string
   createdAt: Date
   updatedAt?: Date | null
@@ -17,6 +18,10 @@ export class Admin extends Entity<AdminProps> {
 
   get cpf() {
     return this.props.cpf
+  }
+
+  get role() {
+    return this.props.role
   }
 
   get password() {
@@ -45,10 +50,14 @@ export class Admin extends Entity<AdminProps> {
     this.touch()
   }
 
-  static create(props: Optional<AdminProps, 'createdAt'>, id?: UniqueEntityID) {
+  static create(
+    props: Optional<AdminProps, 'role' | 'createdAt'>,
+    id?: UniqueEntityID,
+  ) {
     const admin = new Admin(
       {
         ...props,
+        role: props.role ?? 'ADMIN',
         createdAt: props.createdAt ?? new Date(),
       },
       id,

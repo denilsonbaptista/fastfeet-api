@@ -5,6 +5,7 @@ import { Optional } from '@/core/types/optional'
 interface DeliveryPersonProps {
   name: string
   cpf: string
+  role: string
   password: string
   createdAt: Date
   updatedAt?: Date | null
@@ -17,6 +18,10 @@ export class DeliveryPerson extends Entity<DeliveryPersonProps> {
 
   get cpf() {
     return this.props.cpf
+  }
+
+  get role() {
+    return this.props.role
   }
 
   get password() {
@@ -52,6 +57,7 @@ export class DeliveryPerson extends Entity<DeliveryPersonProps> {
     const deliveryPerson = new DeliveryPerson(
       {
         ...props,
+        role: props.role ?? 'DELIVERY PERSON',
         createdAt: props.createdAt ?? new Date(),
       },
       id,
