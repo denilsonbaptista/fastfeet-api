@@ -40,4 +40,15 @@ describe('Register Student', () => {
     expect(result.isRight()).toBe(true)
     expect(inMemoryAdminsRepository.items[0].password).toEqual(hashedPassword)
   })
+
+  it('should assign the role of ADMIN to the created user', async () => {
+    const result = await sut.execute({
+      name: 'John Doe',
+      cpf: '000.000.000.00',
+      password: '123456',
+    })
+
+    expect(result.isRight()).toBe(true)
+    expect(inMemoryAdminsRepository.items[0].role).toEqual('ADMIN')
+  })
 })
