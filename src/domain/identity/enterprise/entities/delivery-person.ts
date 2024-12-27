@@ -51,7 +51,7 @@ export class DeliveryPerson extends Entity<DeliveryPersonProps> {
   }
 
   static create(
-    props: Optional<DeliveryPersonProps, 'createdAt'>,
+    props: Optional<DeliveryPersonProps, 'role' | 'createdAt'>,
     id?: UniqueEntityID,
   ) {
     const deliveryPerson = new DeliveryPerson(
