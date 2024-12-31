@@ -3,8 +3,8 @@ import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 import { Admin } from '../../enterprise/entities/admin'
 import { HashGenerator } from '../cryptography/hash-generator'
 import { DeliveryPerson } from '../../enterprise/entities/delivery-person'
-import { RegisterUsersRepository } from '../repositories/register-users-repository'
 import { UserRole } from '../../enterprise/entities/value-objects/user-role'
+import { UsersRepository } from '../repositories/users-repository'
 
 interface RegisterUserUseCaseRequest {
   name: string
@@ -22,7 +22,7 @@ type RegisterUserUseCaseResponse = Either<
 
 export class RegisterUserUseCase {
   constructor(
-    private registerUsersRepository: RegisterUsersRepository,
+    private usersRepository: UsersRepository,
     private hashGenerator: HashGenerator,
   ) {}
 
@@ -32,8 +32,7 @@ export class RegisterUserUseCase {
     role,
     password,
   }: RegisterUserUseCaseRequest): Promise<RegisterUserUseCaseResponse> {
-    const userWithSameCPF =
-      await this.registerUsersRepository.findUserByCPF(cpf)
+    const userWithSameCPF = await this.usersRepository.findUserByCPF(cpf)
 
     if (userWithSameCPF) {
       return left(new UserAlreadyExistsError())
@@ -54,7 +53,7 @@ export class RegisterUserUseCase {
             password: hashedPassword,
           })
 
-    await this.registerUsersRepository.create(user)
+    await this.usersRepository.create(user)
 
     return right({
       user,
