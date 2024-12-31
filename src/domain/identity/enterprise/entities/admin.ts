@@ -3,10 +3,10 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { UserRole } from './value-objects/user-role'
 
-interface AdminProps {
+export interface AdminProps {
   name: string
   cpf: string
-  role: UserRole.ADMIN
+  role: UserRole
   password: string
   createdAt: Date
   updatedAt?: Date | null
@@ -43,6 +43,16 @@ export class Admin extends Entity<AdminProps> {
 
   set name(name: string) {
     this.props.name = name
+    this.touch()
+  }
+
+  set cpf(cpf: string) {
+    this.props.cpf = cpf
+    this.touch()
+  }
+
+  set role(role: UserRole) {
+    this.props.role = role
     this.touch()
   }
 

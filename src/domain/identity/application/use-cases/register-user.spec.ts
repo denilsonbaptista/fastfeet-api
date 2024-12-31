@@ -1,19 +1,19 @@
-import { InMemoryRegisterUsersRepository } from 'test/repositories/in-memory-register-users-repository'
 import { FakeHasher } from 'test/cryptography/fake-hasher'
 import { RegisterUserUseCase } from './register-user'
 import { UserRole } from '../../enterprise/entities/value-objects/user-role'
+import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repository'
 
-let inMemoryRegisterUsersRepository: InMemoryRegisterUsersRepository
+let inMemoryUsersRepository: InMemoryUsersRepository
 let fakeHasher: FakeHasher
 let sut: RegisterUserUseCase
 
 describe('Register as an administrator user and delivery user.', () => {
   beforeEach(() => {
-    inMemoryRegisterUsersRepository = new InMemoryRegisterUsersRepository()
+    inMemoryUsersRepository = new InMemoryUsersRepository()
 
     fakeHasher = new FakeHasher()
 
-    sut = new RegisterUserUseCase(inMemoryRegisterUsersRepository, fakeHasher)
+    sut = new RegisterUserUseCase(inMemoryUsersRepository, fakeHasher)
   })
 
   it('should be able to register a standard user', async () => {
@@ -25,11 +25,9 @@ describe('Register as an administrator user and delivery user.', () => {
 
     expect(result.isRight()).toBe(true)
     expect(result.value).toEqual({
-      user: inMemoryRegisterUsersRepository.items[0],
+      user: inMemoryUsersRepository.items[0],
     })
-    expect(inMemoryRegisterUsersRepository.items[0].role).toEqual(
-      'DELIVERY PERSON',
-    )
+    expect(inMemoryUsersRepository.items[0].role).toEqual('DELIVERY PERSON')
   })
 
   it('should be able to register an admin user', async () => {
@@ -42,9 +40,9 @@ describe('Register as an administrator user and delivery user.', () => {
 
     expect(result.isRight()).toBe(true)
     expect(result.value).toEqual({
-      user: inMemoryRegisterUsersRepository.items[0],
+      user: inMemoryUsersRepository.items[0],
     })
-    expect(inMemoryRegisterUsersRepository.items[0].role).toEqual('ADMIN')
+    expect(inMemoryUsersRepository.items[0].role).toEqual('ADMIN')
   })
 
   it('should hash user password upon registration', async () => {
@@ -57,8 +55,6 @@ describe('Register as an administrator user and delivery user.', () => {
     const hashedPassword = await fakeHasher.hash('123456')
 
     expect(result.isRight()).toBe(true)
-    expect(inMemoryRegisterUsersRepository.items[0].password).toEqual(
-      hashedPassword,
-    )
+    expect(inMemoryUsersRepository.items[0].password).toEqual(hashedPassword)
   })
 })
