@@ -2,17 +2,16 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
-interface RecipientProps {
+export interface RecipientProps {
   name: string
   cpf: string
   street: string
-  number: string
+  number: number
   neighborhood: string
-  complement: string
+  complement?: string | null
   city: string
   state: string
   zip: string
-  packageId: UniqueEntityID
   createdAt: Date
   updatedAt?: Date | null
 }
@@ -54,10 +53,6 @@ export class Recipient extends Entity<RecipientProps> {
     return this.props.zip
   }
 
-  get packageId() {
-    return this.props.packageId
-  }
-
   get createdAt() {
     return this.props.createdAt
   }
@@ -85,7 +80,7 @@ export class Recipient extends Entity<RecipientProps> {
     this.touch()
   }
 
-  set number(number: string) {
+  set number(number: number) {
     this.props.number = number
     this.touch()
   }
