@@ -6,7 +6,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 let inMemoryRecipientsRepository: InMemoryRecipientsRepository
 let sut: EditRecipientUseCase
 
-describe('Register as an administrator user and delivery user.', () => {
+describe('Edit Recipient', () => {
   beforeEach(() => {
     inMemoryRecipientsRepository = new InMemoryRecipientsRepository()
 

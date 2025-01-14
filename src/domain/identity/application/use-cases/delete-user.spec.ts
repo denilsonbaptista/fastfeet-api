@@ -6,7 +6,7 @@ import { DeleteUserUseCase } from './delete-user'
 let inMemoryUsersRepository: InMemoryUsersRepository
 let sut: DeleteUserUseCase
 
-describe('Register as an administrator user and delivery user.', () => {
+describe('Delete User', () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository()
 

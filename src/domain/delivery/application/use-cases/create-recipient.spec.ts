@@ -4,7 +4,7 @@ import { CreateRecipientUseCase } from './create-recipient'
 let inMemoryRecipientsRepository: InMemoryRecipientsRepository
 let sut: CreateRecipientUseCase
 
-describe('Register as an administrator user and delivery user.', () => {
+describe('Create Recipient', () => {
   beforeEach(() => {
     inMemoryRecipientsRepository = new InMemoryRecipientsRepository()
 

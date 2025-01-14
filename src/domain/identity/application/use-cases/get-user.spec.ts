@@ -5,7 +5,7 @@ import { makeUser } from 'test/factories/make-user'
 let inMemoryUsersRepository: InMemoryUsersRepository
 let sut: GetUserUseCase
 
-describe('Register as an administrator user and delivery user.', () => {
+describe('Show details of a user', () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository()
 

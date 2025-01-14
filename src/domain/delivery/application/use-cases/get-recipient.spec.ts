@@ -5,7 +5,7 @@ import { makeRecipient } from 'test/factories/make-recipient'
 let inMemoryRecipientsRepository: InMemoryRecipientsRepository
 let sut: GetRecipientUseCase
 
-describe('Register as an administrator user and delivery user.', () => {
+describe('Recipient details', () => {
   beforeEach(() => {
     inMemoryRecipientsRepository = new InMemoryRecipientsRepository()
 

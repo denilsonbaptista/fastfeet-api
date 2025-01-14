@@ -3,7 +3,8 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
 export interface ParcelProps {
-  recipientId: string
+  bundleID: string
+  recipientId: UniqueEntityID
   status: string
   postedAt: Date
   withdrawalAt?: Date | null
@@ -12,6 +13,10 @@ export interface ParcelProps {
 }
 
 export class Parcel extends Entity<ParcelProps> {
+  get bundleID() {
+    return this.props.bundleID
+  }
+
   get recipientId() {
     return this.props.recipientId
   }

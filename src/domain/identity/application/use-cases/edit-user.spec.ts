@@ -7,7 +7,7 @@ import { UserRole } from '../../enterprise/entities/value-objects/user-role'
 let inMemoryUsersRepository: InMemoryUsersRepository
 let sut: EditUserUseCase
 
-describe('Register as an administrator user and delivery user.', () => {
+describe('Edit User', () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository()
 

@@ -7,7 +7,7 @@ let inMemoryUsersRepository: InMemoryUsersRepository
 let fakeHasher: FakeHasher
 let sut: RegisterUserUseCase
 
-describe('Register as an administrator user and delivery user.', () => {
+describe('Register as an administrator user and delivery user', () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository()
 
