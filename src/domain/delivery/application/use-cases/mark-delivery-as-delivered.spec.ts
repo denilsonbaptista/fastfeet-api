@@ -1,19 +1,19 @@
 import { makeParcel } from 'test/factories/make-parcel'
 import { InMemoryParcelsRepository } from 'test/repositories/in-memory-parcel-repository'
-import { MakeOrderWaitingUseCase } from './make-order-waiting'
+import { MarkDeliveryAsDeliveredUseCase } from './mark-delivery-as-delivered'
 
 let inMemoryParcelsRepository: InMemoryParcelsRepository
-let sut: MakeOrderWaitingUseCase
+let sut: MarkDeliveryAsDeliveredUseCase
 
-describe('Make order waiting', () => {
+describe('Mark a delivery as delivered', () => {
   beforeEach(() => {
     inMemoryParcelsRepository = new InMemoryParcelsRepository()
 
-    sut = new MakeOrderWaitingUseCase(inMemoryParcelsRepository)
+    sut = new MarkDeliveryAsDeliveredUseCase(inMemoryParcelsRepository)
   })
 
-  it('should be possible to mark an order as pending', async () => {
-    const parcel = makeParcel({ status: 'Em trânsito' })
+  it('should be possible to mark a delivery as delivered', async () => {
+    const parcel = makeParcel({ status: 'pacote retirado' })
 
     await inMemoryParcelsRepository.create(parcel)
 
@@ -22,7 +22,7 @@ describe('Make order waiting', () => {
     })
 
     expect(inMemoryParcelsRepository.items[0]).toMatchObject({
-      status: 'aguardando',
+      status: 'delivered',
     })
   })
 })

@@ -3,30 +3,30 @@ import { Parcel } from '../../enterprise/entities/parcel'
 import { ParcelsRepository } from '../repositories/parcels-repository'
 import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-error'
 
-interface MakeOrderWaitingUseCaseRequest {
+interface MarkDeliveryAsDeliveredUseCaseRequest {
   id: string
 }
 
-type MakeOrderWaitingUseCaseResponse = Either<
+type MarkDeliveryAsDeliveredUseCaseResponse = Either<
   ResourceNotFoundError,
   {
     parcel: Parcel
   }
 >
 
-export class MakeOrderWaitingUseCase {
+export class MarkDeliveryAsDeliveredUseCase {
   constructor(private parcelsRepository: ParcelsRepository) {}
 
   async execute({
     id,
-  }: MakeOrderWaitingUseCaseRequest): Promise<MakeOrderWaitingUseCaseResponse> {
+  }: MarkDeliveryAsDeliveredUseCaseRequest): Promise<MarkDeliveryAsDeliveredUseCaseResponse> {
     const parcel = await this.parcelsRepository.findById(id)
 
     if (!parcel) {
       return left(new ResourceNotFoundError())
     }
 
-    parcel.status = 'aguardando'
+    parcel.status = 'delivered'
 
     await this.parcelsRepository.save(parcel)
 
