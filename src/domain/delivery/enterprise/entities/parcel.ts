@@ -5,6 +5,7 @@ import { Optional } from '@/core/types/optional'
 export interface ParcelProps {
   bundleID: string
   recipientId: UniqueEntityID
+  deliveryPersonId?: UniqueEntityID
   status: string
   postedAt: Date
   withdrawalAt?: Date | null
@@ -15,6 +16,10 @@ export interface ParcelProps {
 export class Parcel extends Entity<ParcelProps> {
   get bundleID() {
     return this.props.bundleID
+  }
+
+  get deliveryPersonId() {
+    return this.props.deliveryPersonId
   }
 
   get recipientId() {
@@ -47,6 +52,11 @@ export class Parcel extends Entity<ParcelProps> {
 
   set status(status: string) {
     this.props.status = status
+    this.touch()
+  }
+
+  set deliveryPersonId(deliveryPersonId: UniqueEntityID) {
+    this.props.deliveryPersonId = deliveryPersonId
     this.touch()
   }
 

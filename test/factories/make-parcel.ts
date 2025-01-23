@@ -12,6 +12,7 @@ export function makeParcel(
 ) {
   const parcel = Parcel.create(
     {
+      bundleID: faker.number.int().toString(),
       recipientId: new UniqueEntityID(),
       status: faker.lorem.sentence(),
       postedAt: faker.date.recent(),

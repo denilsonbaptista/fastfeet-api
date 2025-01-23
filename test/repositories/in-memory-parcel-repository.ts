@@ -1,3 +1,4 @@
+import { PaginationParams } from '@/core/repositories/pagination-params'
 import { ParcelsRepository } from '@/domain/delivery/application/repositories/parcels-repository'
 import { Parcel } from '@/domain/delivery/enterprise/entities/parcel'
 
@@ -22,6 +23,17 @@ export class InMemoryParcelsRepository implements ParcelsRepository {
     }
 
     return parcel
+  }
+
+  async findManyByParcelsDeliveryPersonId(
+    deliveryPersonId: string,
+    { page }: PaginationParams,
+  ): Promise<Parcel[]> {
+    const parcels = this.items
+      .filter((item) => item.deliveryPersonId.toString() === deliveryPersonId)
+      .slice((page - 1) * 20, page * 20)
+
+    return parcels
   }
 
   async create(parcel: Parcel): Promise<void> {
