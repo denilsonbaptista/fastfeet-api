@@ -14,7 +14,7 @@ export function makeParcel(
     {
       bundleID: faker.number.int().toString(),
       recipientId: new UniqueEntityID(),
-      status: faker.lorem.sentence(),
+      status: 'Aguardando',
       postedAt: faker.date.recent(),
       ...override,
     },

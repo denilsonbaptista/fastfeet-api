@@ -12,6 +12,8 @@ export interface RecipientProps {
   city: string
   state: string
   zip: string
+  latitude: number
+  longitude: number
   createdAt: Date
   updatedAt?: Date | null
 }
@@ -51,6 +53,14 @@ export class Recipient extends Entity<RecipientProps> {
 
   get zip() {
     return this.props.zip
+  }
+
+  get latitude() {
+    return this.props.latitude
+  }
+
+  get longitude() {
+    return this.props.longitude
   }
 
   get createdAt() {
@@ -107,6 +117,16 @@ export class Recipient extends Entity<RecipientProps> {
 
   set zip(zip: string) {
     this.props.zip = zip
+    this.touch()
+  }
+
+  set latitude(latitude: number) {
+    this.props.latitude = latitude
+    this.touch()
+  }
+
+  set longitude(longitude: number) {
+    this.props.longitude = longitude
     this.touch()
   }
 

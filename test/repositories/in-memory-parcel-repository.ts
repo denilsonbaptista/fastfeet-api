@@ -1,8 +1,15 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import { ParcelsRepository } from '@/domain/delivery/application/repositories/parcels-repository'
+import {
+  ParcelsRepository,
+  type FindManyParcelsNearbyParams,
+} from '@/domain/delivery/application/repositories/parcels-repository'
 import { Parcel } from '@/domain/delivery/enterprise/entities/parcel'
+import { InMemoryRecipientsRepository } from './in-memory-recipients-repository'
+import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates'
 
 export class InMemoryParcelsRepository implements ParcelsRepository {
+  constructor(private recipientsRepository?: InMemoryRecipientsRepository) {}
+
   public items: Parcel[] = []
 
   async findById(id: string): Promise<Parcel | null> {
@@ -34,6 +41,33 @@ export class InMemoryParcelsRepository implements ParcelsRepository {
       .slice((page - 1) * 20, page * 20)
 
     return parcels
+  }
+
+  async findManyParcelsNearby(
+    params: FindManyParcelsNearbyParams,
+  ): Promise<Parcel[]> {
+    const recipientsNearby = this.recipientsRepository.items.filter((item) => {
+      return (
+        getDistanceBetweenCoordinates(
+          {
+            latitude: params.latitude,
+            longitude: params.longitude,
+          },
+          {
+            latitude: item.latitude,
+            longitude: item.longitude,
+          },
+        ) <= 10
+      )
+    })
+
+    const recipientId = recipientsNearby.map((recipient) => recipient.id)
+
+    const parcel = this.items.filter((parcel) =>
+      recipientId.includes(parcel.recipientId),
+    )
+
+    return parcel
   }
 
   async create(parcel: Parcel): Promise<void> {
