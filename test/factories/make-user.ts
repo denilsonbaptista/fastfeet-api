@@ -1,12 +1,12 @@
 import { faker } from '@faker-js/faker'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { Admin, AdminProps } from '@/domain/identity/enterprise/entities/admin'
+import { Admin, AdminProps } from '@/domain/delivery/enterprise/entities/admin'
 import {
   DeliveryPerson,
   DeliveryPersonProps,
-} from '@/domain/identity/enterprise/entities/delivery-person'
-import { UserRole } from '@/domain/identity/enterprise/entities/value-objects/user-role'
+} from '@/domain/delivery/enterprise/entities/delivery-person'
+import { UserRole } from '@/domain/delivery/enterprise/entities/value-objects/user-role'
 
 export function makeUser(
   override: Partial<AdminProps | DeliveryPersonProps> = {},

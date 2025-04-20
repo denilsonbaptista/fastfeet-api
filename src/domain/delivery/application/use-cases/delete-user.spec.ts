@@ -1,7 +1,7 @@
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repository'
 import { makeUser } from 'test/factories/make-user'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { DeleteUserUseCase } from './delete-user'
+import { DeleteUserUseCase } from './use-cases/delete-user'
 
 let inMemoryUsersRepository: InMemoryUsersRepository
 let sut: DeleteUserUseCase

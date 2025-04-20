@@ -1,10 +1,10 @@
 import { Either, left, right } from '@/core/logic/either'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 import { Admin } from '../../enterprise/entities/admin'
-import { HashGenerator } from '../cryptography/hash-generator'
+import { HashGenerator } from '../../../delivery/application/cryptography/hash-generator'
 import { DeliveryPerson } from '../../enterprise/entities/delivery-person'
 import { UserRole } from '../../enterprise/entities/value-objects/user-role'
-import { UsersRepository } from '../repositories/users-repository'
+import { UsersRepository } from '../../../delivery/application/repositories/users-repository'
 
 interface RegisterUserUseCaseRequest {
   name: string

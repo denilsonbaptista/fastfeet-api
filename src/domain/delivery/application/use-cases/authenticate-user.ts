@@ -1,7 +1,7 @@
 import { Either, left, right } from '@/core/logic/either'
-import { Encrypter } from '../cryptography/encrypter'
-import { HashComparer } from '../cryptography/hash-comparer'
-import { UsersRepository } from '../repositories/users-repository'
+import { Encrypter } from '../../../delivery/application/cryptography/encrypter'
+import { HashComparer } from '../../../delivery/application/cryptography/hash-comparer'
+import { UsersRepository } from '../../../delivery/application/repositories/users-repository'
 import { WrongCredentialsError } from './errors/wrong-credentials-error'
 
 interface AuthenticateUserUseCaseRequest {

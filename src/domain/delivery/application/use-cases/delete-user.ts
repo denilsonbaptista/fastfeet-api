@@ -1,5 +1,5 @@
 import { Either, left, right } from '@/core/logic/either'
-import { UsersRepository } from '../repositories/users-repository'
+import { UsersRepository } from '../../../delivery/application/repositories/users-repository'
 import { UserDoesNotExistError } from './errors/user-does-not-exist-error'
 
 interface DeleteUserUseCaseRequest {

@@ -1,5 +1,5 @@
 import { FakeHasher } from 'test/cryptography/fake-hasher'
-import { RegisterUserUseCase } from './register-user'
+import { RegisterUserUseCase } from './use-cases/register-user'
 import { UserRole } from '../../enterprise/entities/value-objects/user-role'
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repository'
 

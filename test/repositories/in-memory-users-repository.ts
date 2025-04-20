@@ -1,6 +1,6 @@
-import { UsersRepository } from '@/domain/identity/application/repositories/users-repository'
-import { Admin } from '@/domain/identity/enterprise/entities/admin'
-import { DeliveryPerson } from '@/domain/identity/enterprise/entities/delivery-person'
+import { UsersRepository } from '@/domain/delivery/application/repositories/users-repository'
+import { Admin } from '@/domain/delivery/enterprise/entities/admin'
+import { DeliveryPerson } from '@/domain/delivery/enterprise/entities/delivery-person'
 
 export class InMemoryUsersRepository implements UsersRepository {
   public items: (Admin | DeliveryPerson)[] = []
